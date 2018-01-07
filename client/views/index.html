@@ -16,7 +16,9 @@
       <div class="todo-form">
         <form>
           <div class="form-group">
+            <input type="userid" class="form-control input-lg" placeholder="Enter text..." ng-model="formData.userid">
             <input type="text" class="form-control input-lg" placeholder="Enter text..." ng-model="formData.text">
+            <input type="happiness" class="form-control input-lg" placeholder="Enter text..." ng-model="formData.happiness">
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createTodo()">Add Todo</button>
         </form>

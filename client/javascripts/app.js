@@ -15,7 +15,6 @@ angular.module('nodeTodo', [])
   $scope.createTodo = () => {
     $http.post('/api/v1/todos', $scope.formData)
     .success((data) => {
-      $scope.formData = {};
       $scope.todoData = data;
       console.log(data);
     })

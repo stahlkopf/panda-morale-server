@@ -34,9 +34,11 @@ router.get('/api/v1/todos', (req, res, next) => {
 });
 
 router.post('/api/v1/todos', (req, res, next) => {
+  console.log(req.body);
   const results = [];
   // Grab data from http request
-  const data = {userid:req.body.userid, text: req.body.text, happiness: req.body.happiness, complete: false};
+  const data = {userid:req.body.userid, text: req.body.text, happiness: req.body.happiness, anonymous:req.body.anonymous};
+
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {
     // Handle connection errors
@@ -46,8 +48,8 @@ router.post('/api/v1/todos', (req, res, next) => {
       return res.status(500).json({success: false, data: err});
     }
     // SQL Query > Insert Data
-    client.query('INSERT INTO items(userid, text, happiness, complete) values($1, $2, $3, $4)',
-    [data.userid, data.text, data.happiness, data.complete]);
+    client.query('INSERT INTO items(userid, text, happiness, anonymous) values($1, $2, $3, $4)',
+    [data.userid, data.text, data.happiness, data.anonymous]);
     // SQL Query > Select Data
     const query = client.query('SELECT * FROM items ORDER BY id ASC');
     // Stream results back one row at a time
